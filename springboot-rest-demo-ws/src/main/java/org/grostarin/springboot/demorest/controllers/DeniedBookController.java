@@ -3,9 +3,9 @@ package org.grostarin.springboot.demorest.controllers;
 import javax.validation.Valid;
 
 import org.grostarin.springboot.demorest.annotations.LogExecutionTime;
-import org.grostarin.springboot.demorest.domain.Book;
+import org.grostarin.springboot.demorest.domain.DeniedBook;
 import org.grostarin.springboot.demorest.dto.BookSearch;
-import org.grostarin.springboot.demorest.services.BookServices;
+import org.grostarin.springboot.demorest.services.DeniedBookServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,27 +19,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/books")
-public class BookController {
+@RequestMapping("/api/denied/books")
+public class DeniedBookController {
 
     @Autowired
-    private BookServices bookServices;
-
+    private DeniedBookServices bookServices;
 
     @GetMapping
     @LogExecutionTime
-    public Iterable<Book> findAll(@Valid BookSearch bookSearchDTO) {
+    public Iterable<DeniedBook> findAll(@Valid BookSearch bookSearchDTO) {
         return bookServices.findAll(bookSearchDTO);
     }
 
     @GetMapping("/{id}")
-    public Book findOne(@PathVariable long id) {
+    public DeniedBook findOne(@PathVariable long id) {
         return bookServices.findOne(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Book create(@RequestBody Book book) {
+    public DeniedBook create(@RequestBody DeniedBook book) {
         return bookServices.create(book);
     }
 
@@ -49,7 +48,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public Book updateBook(@RequestBody Book book, @PathVariable long id) {
+    public DeniedBook updateBook(@RequestBody DeniedBook book, @PathVariable long id) {
         return bookServices.updateBook(book, id);
     }
 }
